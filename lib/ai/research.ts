@@ -9,8 +9,8 @@
  * ## Why this is a pre-fetch rather than model-driven tool calling
  *
  * The obvious design is to expose a `search` tool and let the model decide
- * when to call it. It is also the wrong one here. Debate turns run on
- * `llama-3.1-8b-instant`, chosen because turns are the bulk of the traffic;
+ * when to call it. It is also the wrong one here. Debate turns run on a small
+ * model (`GROQ_DEBATE_MODEL`), chosen because turns are the bulk of the traffic;
  * small models emit malformed or unnecessary tool calls often enough that
  * every turn would need a repair path, and a failed tool call mid-debate is a
  * dead turn the founder watches happen.

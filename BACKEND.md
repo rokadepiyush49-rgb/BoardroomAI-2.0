@@ -13,7 +13,7 @@ Copy `.env.example` to `.env.local` and fill in:
 | Variable | Required | Purpose |
 |---|---|---|
 | `GROQ_API_KEY` | yes | Every executive persona, the report, and the deliverables. Get one at [console.groq.com/keys](https://console.groq.com/keys). |
-| `GROQ_MODEL` | no | Defaults to `llama-3.3-70b-versatile`. See "Choosing a model" below. |
+| `GROQ_MODEL` | no | Defaults to `openai/gpt-oss-120b`. See "Choosing a model" below. |
 | `NEXT_PUBLIC_SUPABASE_URL` | yes | Supabase project URL. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | yes | Supabase anon/publishable key. Never the service-role key. |
 | `BLOB_READ_WRITE_TOKEN` | no | Only if you add deck uploads to `POST /api/pitches`. |
@@ -105,6 +105,14 @@ model works — but the schema-capable ones give noticeably more reliable
 reports. If enum drift shows up in reports, pin a schema-capable model via
 `GROQ_MODEL` (`openai/gpt-oss-120b`, `moonshotai/kimi-k2-instruct-0905`).
 `GET https://api.groq.com/openai/v1/models` lists what your key can reach.
+
+Groq's current chat models reason before answering, and those hidden
+reasoning tokens are billed against the same `max_completion_tokens` budget
+as the visible reply. A debate turn is capped at 180-260 tokens, which a
+default-effort model spends entirely on thinking — the reply arrives with
+empty `content` and `finish_reason: "length"`. Every request therefore sends
+`reasoning_effort: "low"`; `post()` drops the field and re-sends once if the
+pinned model rejects it.
 
 Schemas are authored as plain JSON Schema. `toStrictSchema()` adds
 `additionalProperties: false` and fills `required` on every nested object,

@@ -77,6 +77,20 @@ const MAX_RATE_LIMIT_RETRIES = 3;
 const MAX_RETRY_DELAY_MS = 10_000;
 
 /**
+ * Reasoning models bill their private thinking against the same
+ * `max_completion_tokens` budget as the visible answer, and Groq's current
+ * chat models all reason by default. A debate turn is capped at 180-260
+ * tokens, which a default-effort model spends entirely on reasoning — the
+ * reply comes back with an empty `content` and `finish_reason: "length"`,
+ * which surfaces as "Groq returned no content". Low effort keeps thinking
+ * to a few dozen tokens and leaves the budget for the answer.
+ *
+ * Not every model accepts the field (`qwen/qwen3.6-27b` takes only `none`
+ * or `default`), so `post` drops it and re-sends if the model objects.
+ */
+const REASONING_EFFORT = "low";
+
+/**
  * Groq reports how long to wait in two places, and neither is guaranteed:
  * a `retry-after` header in seconds, and a "Please try again in 340ms"
  * sentence inside the error message. The header is authoritative when
@@ -196,7 +210,7 @@ async function postOnce(body: Record<string, unknown>, signal?: AbortSignal) {
  * including the 400 that drives the JSON-mode fallback — is returned
  * untouched for the caller to interpret.
  */
-async function post(body: Record<string, unknown>, signal?: AbortSignal) {
+async function postWithRateLimitRetries(body: Record<string, unknown>, signal?: AbortSignal) {
   for (let attempt = 0; ; attempt++) {
     const result = await postOnce(body, signal);
     if (result.response.status !== 429 || attempt >= MAX_RATE_LIMIT_RETRIES) {
@@ -207,6 +221,26 @@ async function post(body: Record<string, unknown>, signal?: AbortSignal) {
       signal,
     );
   }
+}
+
+/**
+ * A model that does not take `reasoning_effort` rejects the entire request
+ * with a 400 naming the field, so a pinned `GROQ_MODEL` would otherwise be
+ * broken by a parameter it never asked for. Re-send once without it. This
+ * has to happen before the caller sees the 400, since the schema path reads
+ * any 400 as "this model has no `json_schema` support" and falls back.
+ */
+async function post(body: Record<string, unknown>, signal?: AbortSignal) {
+  const result = await postWithRateLimitRetries(body, signal);
+
+  const rejectedTheField =
+    result.response.status === 400 &&
+    "reasoning_effort" in body &&
+    result.payload?.error?.message?.includes("reasoning_effort");
+  if (!rejectedTheField) return result;
+
+  const { reasoning_effort: _unsupported, ...withoutEffort } = body;
+  return postWithRateLimitRetries(withoutEffort, signal);
 }
 
 function readText(payload: ChatCompletion | null, model: string) {
@@ -224,9 +258,17 @@ function readText(payload: ChatCompletion | null, model: string) {
 
 function failure(status: number, payload: ChatCompletion | null, model: string) {
   const detail =
-    payload?.error?.message ??
-    (status === 404 ? `no such model "${model}" — check GROQ_MODEL` : `HTTP ${status}`);
-  return new GroqError(`Groq request failed (${status}): ${detail}`, status);
+    payload?.error?.message ?? (status === 404 ? `no such model "${model}"` : `HTTP ${status}`);
+
+  // Groq's own 404 text ("does not exist or you do not have access to it")
+  // reads like a billing problem, but the usual cause is a model that has
+  // since been retired. Point at the list that settles which it is.
+  const hint =
+    status === 404
+      ? ` Groq may have retired "${model}" — list the ids your key can reach at https://api.groq.com/openai/v1/models, then set GROQ_MODEL to one of them.`
+      : "";
+
+  return new GroqError(`Groq request failed (${status}): ${detail}${hint}`, status);
 }
 
 async function generate(options: GenerateOptions): Promise<string> {
@@ -236,6 +278,7 @@ async function generate(options: GenerateOptions): Promise<string> {
     model,
     temperature: options.temperature ?? 0.8,
     max_completion_tokens: options.maxOutputTokens ?? 512,
+    reasoning_effort: REASONING_EFFORT,
   };
 
   if (!options.responseSchema) {
