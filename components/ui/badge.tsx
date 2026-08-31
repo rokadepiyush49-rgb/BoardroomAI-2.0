@@ -2,18 +2,29 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+/**
+ * Badges are pills — one of only two places the 9999px radius is allowed
+ * (the other being marketing-scale CTAs). Set in caption type, 12px/400.
+ *
+ * The tone ladder is deliberately near-monochromatic: `brass` is the
+ * default neutral chip (canvas fill, hairline ring, ink label), `signal`
+ * is the one solid-colour chip, and the semantic tones stay tinted rather
+ * than filled so a dashboard full of badges never turns into confetti.
+ */
 const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium leading-none [&_svg]:size-3",
+  "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium leading-4 [&_svg]:size-3",
   {
     variants: {
       tone: {
-        brass: "border-primary/30 bg-primary/15 text-primary",
-        signal: "border-signal/30 bg-signal/15 text-signal",
-        success: "border-success/30 bg-success/15 text-success",
-        warning: "border-warning/30 bg-warning/15 text-warning",
-        destructive: "border-destructive/30 bg-destructive/15 text-destructive",
-        muted: "border-border bg-muted text-muted-foreground",
-        outline: "border-border-strong bg-transparent text-foreground",
+        brass: "border-border bg-surface text-foreground",
+        // The solid brand-blue chip — category labels, "live" markers, and
+        // anything AI-originated.
+        signal: "border-transparent bg-signal text-signal-foreground",
+        success: "border-success/25 bg-success/10 text-success",
+        warning: "border-warning/30 bg-warning/15 text-[hsl(38_91%_38%)] dark:text-warning",
+        destructive: "border-destructive/25 bg-destructive/10 text-destructive",
+        muted: "border-transparent bg-muted text-muted-foreground",
+        outline: "border-border bg-transparent text-muted-foreground",
       },
     },
     defaultVariants: {

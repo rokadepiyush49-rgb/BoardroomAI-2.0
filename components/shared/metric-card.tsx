@@ -31,17 +31,17 @@ export function MetricCard({ label, value, trend, icon: Icon, footer, className 
   const TrendIcon = trendConfig?.icon;
 
   return (
-    <Card className={cn("p-5", className)}>
+    <Card className={cn("p-4", className)}>
       <div className="flex items-start justify-between gap-3">
-        <p className="text-sm font-medium text-muted-foreground">{label}</p>
+        <p className="text-sm text-muted-foreground">{label}</p>
         {Icon && (
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-surface-elevated text-primary">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-md border text-muted-foreground">
             <Icon className="size-4" />
           </span>
         )}
       </div>
 
-      <p className="mt-2.5 font-mono text-3xl font-medium tracking-tight text-foreground">{value}</p>
+      <p className="mt-2.5 text-3xl font-semibold tabular-nums text-foreground">{value}</p>
 
       {trend && trendConfig && TrendIcon && (
         <div className="mt-2 flex items-center gap-1.5">
@@ -54,7 +54,7 @@ export function MetricCard({ label, value, trend, icon: Icon, footer, className 
             <TrendIcon className="size-3" />
             {Math.abs(trend.value)}%
           </span>
-          {trend.label && <span className="text-xs text-muted-foreground">{trend.label}</span>}
+          {trend.label && <span className="text-xs text-muted-soft">{trend.label}</span>}
         </div>
       )}
 

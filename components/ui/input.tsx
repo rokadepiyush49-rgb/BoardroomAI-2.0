@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return (
         <div className="relative flex items-center">
           {startAdornment && (
-            <span className="pointer-events-none absolute left-3 flex items-center text-muted-foreground [&_svg]:size-4">
+            <span className="pointer-events-none absolute left-3 flex items-center text-muted-soft [&_svg]:size-4">
               {startAdornment}
             </span>
           )}
@@ -23,9 +23,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             aria-invalid={invalid}
             className={cn(
-              "flex h-10 w-full rounded-md border border-input bg-surface px-3 py-2 text-sm text-foreground",
-              "placeholder:text-muted-foreground transition-colors duration-150",
-              "focus-visible:border-primary/50 disabled:cursor-not-allowed disabled:opacity-50",
+              "flex h-10 w-full rounded-md border border-input bg-surface px-3 text-sm text-foreground",
+              "placeholder:text-muted-soft transition-colors duration-150",
+              "focus-visible:border-foreground disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted",
               "aria-[invalid=true]:border-destructive aria-[invalid=true]:focus-visible:ring-destructive",
               startAdornment && "pl-9",
               endAdornment && "pr-9",
@@ -34,7 +34,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {endAdornment && (
-            <span className="absolute right-3 flex items-center text-muted-foreground [&_svg]:size-4">
+            <span className="absolute right-3 flex items-center text-muted-soft [&_svg]:size-4">
               {endAdornment}
             </span>
           )}
@@ -48,9 +48,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         aria-invalid={invalid}
         className={cn(
-          "flex h-10 w-full rounded-md border border-input bg-surface px-3 py-2 text-sm text-foreground",
-          "placeholder:text-muted-foreground transition-colors duration-150",
-          "focus-visible:border-primary/50 disabled:cursor-not-allowed disabled:opacity-50",
+          "flex h-10 w-full rounded-md border border-input bg-surface px-3 text-sm text-foreground",
+          "placeholder:text-muted-soft transition-colors duration-150",
+          "focus-visible:border-foreground disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted",
           "aria-[invalid=true]:border-destructive aria-[invalid=true]:focus-visible:ring-destructive",
           className,
         )}

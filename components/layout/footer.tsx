@@ -29,27 +29,27 @@ const footerColumns = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-surface">
-      <div className="container grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-5">
+    <footer className="border-t bg-background">
+      <div className="container grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <Link href="/" className="flex items-center gap-2">
-            <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Gavel className="size-4" />
+            <span className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <Gavel className="size-3.5" />
             </span>
-            <span className="font-display text-lg font-medium tracking-tight">BoardroomAI</span>
+            <span className="text-base font-semibold tracking-tight">BoardroomAI</span>
           </Link>
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
+          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
             A virtual board of AI executives that pressure-tests your startup before a real one does.
           </p>
         </div>
 
         {footerColumns.map((column) => (
           <div key={column.heading}>
-            <p className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">{column.heading}</p>
-            <ul className="mt-4 space-y-2.5">
+            <p className="text-xs font-medium text-muted-soft">{column.heading}</p>
+            <ul className="mt-3 space-y-2.5">
               {column.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-foreground/80 hover:text-primary">
+                  <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                     {link.label}
                   </Link>
                 </li>
@@ -59,10 +59,10 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="border-t border-border">
+      <div className="border-t">
         <div className="container flex flex-col-reverse items-center justify-between gap-3 py-6 sm:flex-row">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} BoardroomAI. All rights reserved.</p>
-          <p className="text-xs text-muted-foreground">Every executive on this board is an AI persona, not a real person.</p>
+          <p className="text-xs text-muted-soft">© {new Date().getFullYear()} BoardroomAI. All rights reserved.</p>
+          <p className="text-xs text-muted-soft">Every executive on this board is an AI persona, not a real person.</p>
         </div>
       </div>
     </footer>

@@ -64,13 +64,13 @@ export function ScoreCard({ label, score, verdict, tone = "brass", size = "md", 
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={cn("font-mono font-semibold tabular-nums text-foreground", text)}>{clamped}</span>
-          <span className="text-[0.65rem] uppercase tracking-wider text-muted-foreground">/ 100</span>
+          <span className={cn("font-semibold tabular-nums tracking-tight text-foreground", text)}>{clamped}</span>
+          <span className="text-xs text-muted-soft">out of 100</span>
         </div>
       </div>
       <div className="space-y-0.5">
         <p className="text-sm font-medium text-foreground">{label}</p>
-        {verdict && <p className="text-xs text-muted-foreground">{verdict}</p>}
+        {verdict && <p className="text-xs text-muted-soft">{verdict}</p>}
       </div>
     </div>
   );

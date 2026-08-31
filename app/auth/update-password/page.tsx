@@ -57,7 +57,7 @@ function UpdatePasswordForm() {
   if (!ready) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-background px-4">
-        <section className="glass w-full max-w-md rounded-2xl border border-border p-8 text-center shadow-2xl">
+        <section className="surface-card w-full max-w-md rounded-md p-6 text-center">
           <p className="text-sm text-muted-foreground">Open the reset link from your email to set a new password.</p>
           <Button asChild variant="outline" className="mt-4">
             <Link href="/auth/forgot-password">Request a new link</Link>
@@ -69,12 +69,12 @@ function UpdatePasswordForm() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-4">
-      <section className="glass w-full max-w-md rounded-2xl border border-border p-8 shadow-2xl">
+      <section className="surface-card w-full max-w-md rounded-md p-6">
         <div className="mb-8 text-center">
-          <span className="mx-auto mb-4 flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+          <span className="mx-auto mb-4 flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Gavel className="size-5" />
           </span>
-          <h1 className="font-display text-2xl font-semibold">Choose a new password</h1>
+          <h1 className="text-2xl font-semibold">Choose a new password</h1>
           <p className="mt-2 text-sm text-muted-foreground">You&apos;ll be signed in once your password is updated.</p>
         </div>
 
