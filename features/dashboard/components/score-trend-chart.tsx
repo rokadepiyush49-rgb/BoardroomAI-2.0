@@ -20,8 +20,8 @@ export function ScoreTrendChart({ data }: { data: ScoreTrendPoint[] }) {
         <Tooltip
           contentStyle={{
             background: "hsl(var(--surface-overlay))",
-            border: "1px solid hsl(var(--border-strong))",
-            borderRadius: 10,
+            border: "1px solid hsl(var(--border))",
+            borderRadius: 6,
             fontSize: 12,
           }}
           labelStyle={{ color: "hsl(var(--foreground))" }}

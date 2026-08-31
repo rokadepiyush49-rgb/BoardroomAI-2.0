@@ -55,7 +55,7 @@ export function StartupHealthContent() {
       </div>
 
       <div className="space-y-3">
-        <h3 className="font-display text-lg font-medium">Flags</h3>
+        <h3 className="text-lg font-semibold">Flags</h3>
         <HealthFlags flags={flags} />
       </div>
     </div>

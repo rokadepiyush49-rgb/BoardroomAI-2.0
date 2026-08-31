@@ -31,7 +31,7 @@ function Field({ label, value }: { label: string; value: string }) {
   if (!value) return null;
   return (
     <div className="min-w-0">
-      <p className="text-[0.7rem] uppercase tracking-wide text-muted-foreground">{label}</p>
+      <p className="text-xs text-muted-soft">{label}</p>
       <p className="mt-0.5 break-words text-sm text-foreground/90">{value}</p>
     </div>
   );
@@ -88,7 +88,7 @@ export function BoardVotes({ votes }: { votes?: ExecutiveVoteDetail[] }) {
 
             <div className="mt-3">
               <div className="flex items-baseline justify-between gap-2">
-                <span className="text-[0.7rem] uppercase tracking-wide text-muted-foreground">
+                <span className="text-xs text-muted-soft">
                   Confidence
                 </span>
                 <span className="font-mono text-xs font-medium text-foreground">

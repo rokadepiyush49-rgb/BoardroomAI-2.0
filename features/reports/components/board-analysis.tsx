@@ -218,7 +218,7 @@ export function BoardAnalysis({ report }: { report: ReportDetail }) {
                   {index < riskTimeline.length - 1 && <span className="w-px flex-1 bg-border" />}
                 </div>
                 <div className="pb-5">
-                  <p className="text-xs font-medium uppercase tracking-wide text-signal">
+                  <p className="text-xs font-medium text-signal">
                     {entry.horizon}
                   </p>
                   <p className="mt-0.5 text-sm text-foreground/90">{entry.risk}</p>
@@ -287,7 +287,7 @@ export function BoardAnalysis({ report }: { report: ReportDetail }) {
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+                  className="inline-flex items-center gap-1.5 text-sm text-signal hover:underline"
                 >
                   {source.title}
                   <ExternalLink className="size-3" />

@@ -74,13 +74,13 @@ export function MeetingControls({
       where the glass panel's rounded corners don't cover.
     */
     <div className="sticky top-0 z-20 -mt-8 bg-background pb-4 pt-8">
-      <div className="glass rounded-xl">
+      <div className="glass rounded-md border">
         <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-start sm:justify-between">
           {/* `min-w-0` so a long one-liner wraps instead of shoving the
               controls out of the header. */}
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="font-display text-lg font-medium">{startupName}</h2>
+              <h2 className="text-lg font-semibold">{startupName}</h2>
               {stage && <Badge tone="muted">{stage}</Badge>}
               <Badge tone={badge.tone} pulse={isRunning || phase === "finalizing"}>
                 {badge.label}

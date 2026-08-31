@@ -24,12 +24,12 @@ export function FeaturesGrid() {
       >
         {deliverables.map((item) => (
           <motion.div key={item.title} variants={fadeUp}>
-            <Card interactive className="h-full p-5">
-              <span className="flex size-10 items-center justify-center rounded-lg bg-primary/12 text-primary">
-                <item.icon className="size-5" />
+            <Card interactive className="h-full p-4">
+              <span className="flex size-9 items-center justify-center rounded-md border text-foreground">
+                <item.icon className="size-4" />
               </span>
               <h3 className="mt-4 font-medium text-foreground">{item.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{item.description}</p>
             </Card>
           </motion.div>
         ))}

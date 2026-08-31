@@ -13,7 +13,7 @@ export function RiskMatrix({ risks }: { risks: RiskRow[] }) {
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-y border-border text-xs uppercase tracking-wide text-muted-foreground">
+            <tr className="border-y bg-background text-xs font-medium text-muted-soft">
               <th className="px-5 py-2 font-medium">Risk</th>
               <th className="px-5 py-2 font-medium">Likelihood</th>
               <th className="px-5 py-2 font-medium">Impact</th>

@@ -36,7 +36,7 @@ export function PrdViewer({ sections, subject }: PrdViewerProps) {
             className={cn(
               "shrink-0 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors lg:w-full",
               section.id === active.id
-                ? "bg-primary/12 text-primary"
+                ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:bg-surface-elevated hover:text-foreground",
             )}
           >
@@ -45,13 +45,13 @@ export function PrdViewer({ sections, subject }: PrdViewerProps) {
         ))}
       </nav>
 
-      <Card className="p-8">
+      <Card className="p-6">
         <article className="space-y-3">
-          <p className="text-xs font-medium uppercase tracking-[0.12em] text-primary">
+          <p className="text-sm font-medium text-muted-soft">
             PRD{subject ? ` · ${subject}` : " · Board-recommended fix"}
           </p>
-          <h2 className="font-display text-2xl font-medium tracking-tight">{active.title}</h2>
-          <p className="whitespace-pre-wrap text-base leading-relaxed text-foreground/90">{active.content}</p>
+          <h2 className="text-2xl font-semibold">{active.title}</h2>
+          <p className="whitespace-pre-wrap text-base leading-7 text-muted-foreground">{active.content}</p>
         </article>
       </Card>
     </div>

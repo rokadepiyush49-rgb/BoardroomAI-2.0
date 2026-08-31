@@ -3,130 +3,97 @@
 @tailwind utilities;
 
 /**
- * BoardroomAI — "Ink & Brass" design tokens.
- * HSL triplets (no `hsl()` wrapper) so Tailwind can compose them with
- * opacity modifiers, e.g. bg-primary/40.
+ * BoardroomAI design tokens.
+ *
+ * The system is near-monochromatic by design: an ink-near-black primary
+ * (#171717) on a canvas-soft body (#fafafa), with pure-white card surfaces
+ * lifting away through a stacked hairline shadow rather than a colour step.
+ * The single decorative gesture is the hero mesh gradient (coral → amber →
+ * teal), which lives at hero scale only.
+ *
+ * Values are HSL triplets (no `hsl()` wrapper) so Tailwind can compose them
+ * with opacity modifiers, e.g. `bg-primary/10`.
  */
 @layer base {
   :root {
-    --shadow-color: 222 40% 2%;
+    --shadow-color: 0 0% 0%;
 
-    /* Dark theme — default and primary experience. A boardroom is lit,
-       not lightless: background is tinted ink-navy, never true black. */
-    --background: 224 24% 7%;
-    --foreground: 40 24% 93%;
+    /* Light is the default and the showcase surface. */
+    --background: 0 0% 98%; /* canvas-soft #fafafa */
+    --foreground: 0 0% 9%; /* ink #171717 */
 
-    --surface: 222 20% 10%;
-    --surface-elevated: 222 18% 13%;
-    --surface-overlay: 222 20% 15%;
+    --surface: 0 0% 100%; /* canvas #ffffff */
+    --surface-elevated: 0 0% 96%; /* hover/nested step */
+    --surface-overlay: 0 0% 100%; /* popovers, dropdown panels */
 
-    --border: 222 16% 20%;
-    --border-strong: 222 16% 28%;
-    --input: 222 16% 22%;
-    --ring: 32 45% 58%;
+    --border: 0 0% 92%; /* hairline #eaeaea */
+    --border-strong: 0 0% 88%; /* hairline-mid #e0e0e0 */
+    --input: 0 0% 92%;
+    --ring: 0 0% 9%;
 
-    /* Brass — primary accent. Warm, desaturated metal, not clay/terracotta. */
-    --brass: 32 42% 58%;
-    --brass-foreground: 224 30% 8%;
-    --brass-muted: 32 30% 30%;
+    /* Primary is ink, not a colour. Black is the conversion target. */
+    --brass: 0 0% 9%;
+    --brass-foreground: 0 0% 100%;
+    --brass-muted: 0 0% 90%;
 
-    /* Signal — reserved exclusively for AI-originated content: agent
-       avatars, live/streaming indicators, generated-copy call-outs. */
-    --signal: 217 79% 66%;
-    --signal-foreground: 224 30% 8%;
-    --signal-muted: 217 40% 28%;
+    /* The one chromatic accent: link/brand blue #0070f3. Retained for
+       AI-originated content (agent avatars, live indicators) so the
+       product keeps its "a machine produced this" tell. */
+    --signal: 212 100% 48%;
+    --signal-foreground: 0 0% 100%;
+    --signal-muted: 212 100% 94%;
 
-    --secondary: 222 16% 16%;
-    --secondary-foreground: 40 24% 93%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 9%;
 
-    --muted: 222 14% 16%;
-    --muted-foreground: 220 10% 62%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 32%; /* body #4d4d4d */
+    --muted-foreground-soft: 0 0% 53%; /* mute #888888 */
 
-    --accent: 222 18% 18%;
-    --accent-foreground: 40 24% 93%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
 
-    --destructive: 356 72% 58%;
-    --destructive-foreground: 40 24% 96%;
+    --destructive: 0 100% 47%; /* #ee0000 */
+    --destructive-foreground: 0 0% 100%;
 
-    --success: 152 48% 45%;
-    --success-foreground: 224 30% 8%;
+    /* The palette maps success to the brand blue rather than a green —
+       the marketing surface is intentionally near-monochromatic and does
+       not introduce accents outside the observed palette. */
+    --success: 212 100% 48%;
+    --success-foreground: 0 0% 100%;
 
-    --warning: 38 88% 58%;
-    --warning-foreground: 224 30% 8%;
+    --warning: 38 91% 55%; /* #f5a623 */
+    --warning-foreground: 0 0% 9%;
 
-    /* Chart series — ordered so adjacent series are always distinguishable
-       at a glance, brass/signal first since they carry brand meaning. */
-    --chart-1: 32 42% 58%;
-    --chart-2: 217 79% 66%;
-    --chart-3: 152 48% 45%;
-    --chart-4: 280 45% 68%;
-    --chart-5: 38 88% 58%;
+    /* Chart series — ink first, then the one brand blue, then neutrals and
+       the two semantic tones. No colour is introduced that the palette
+       doesn't already contain. */
+    --chart-1: 0 0% 9%;
+    --chart-2: 212 100% 48%;
+    --chart-3: 0 0% 53%;
+    --chart-4: 38 91% 55%;
+    --chart-5: 0 100% 47%;
 
-    --radius: 0.875rem;
+    /* Hero mesh gradient stops. Used as a single object at hero scale only —
+       never miniaturised into a button fill, icon background or stripe. */
+    --mesh-warm-start: 0 100% 65%; /* #ff4d4d */
+    --mesh-warm-mid: 38 94% 56%; /* #f9a825 */
+    --mesh-cool-end: 165 73% 60%; /* #50e3c2 */
+
+    --radius: 0.375rem; /* 6px — the measured button + card radius */
   }
 
-  /* Optional light theme — kept for completeness/accessibility preference,
-     not the primary showcase surface. Same hue anchors, inverted lightness. */
-  .light {
-    --shadow-color: 32 20% 60%;
-
-    --background: 42 30% 97%;
-    --foreground: 224 24% 12%;
-
-    --surface: 0 0% 100%;
-    --surface-elevated: 40 30% 98%;
-    --surface-overlay: 0 0% 100%;
-
-    --border: 32 16% 86%;
-    --border-strong: 32 16% 76%;
-    --input: 32 16% 84%;
-    --ring: 32 55% 42%;
-
-    --brass: 32 55% 42%;
-    --brass-foreground: 40 30% 98%;
-    --brass-muted: 32 40% 88%;
-
-    --signal: 217 70% 52%;
-    --signal-foreground: 40 30% 98%;
-    --signal-muted: 217 60% 90%;
-
-    --secondary: 32 20% 93%;
-    --secondary-foreground: 224 24% 12%;
-
-    --muted: 32 16% 92%;
-    --muted-foreground: 222 10% 40%;
-
-    --accent: 32 20% 91%;
-    --accent-foreground: 224 24% 12%;
-
-    --destructive: 356 68% 46%;
-    --destructive-foreground: 40 30% 98%;
-
-    --success: 152 48% 34%;
-    --success-foreground: 40 30% 98%;
-
-    --warning: 38 80% 44%;
-    --warning-foreground: 40 30% 98%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   html {
-    color-scheme: dark;
-    scroll-behavior: smooth;
-  }
-
-  .light {
     color-scheme: light;
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   /* Visible, deliberate focus states everywhere — never suppressed. */
@@ -135,7 +102,8 @@
   }
 
   ::selection {
-    @apply bg-primary/30 text-foreground;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -150,36 +118,191 @@
   }
 }
 
+/*
+ * Dark theme, derived from the same near-monochrome logic: the polarity
+ * flips, ink becomes the canvas, and the primary button inverts to white.
+ * The gradient stops are unchanged — the bloom reads correctly on ink.
+ *
+ * This lives outside `@layer base` on purpose: a bare `.dark { … }` rule
+ * declared inside the base layer is stripped from the compiled stylesheet
+ * by the build's CSS pipeline, which silently leaves the dark theme with no
+ * token values at all. Outside the layer it survives, and still lands after
+ * the `:root` defaults so it overrides them.
+ */
+.dark {
+  --shadow-color: 0 0% 0%;
+
+  --background: 0 0% 4%;
+  --foreground: 0 0% 93%;
+
+  --surface: 0 0% 7%;
+  --surface-elevated: 0 0% 11%;
+  --surface-overlay: 0 0% 11%;
+
+  --border: 0 0% 20%;
+  --border-strong: 0 0% 27%;
+  --input: 0 0% 20%;
+  --ring: 0 0% 83%;
+
+  --brass: 0 0% 100%;
+  --brass-foreground: 0 0% 9%;
+  --brass-muted: 0 0% 25%;
+
+  --signal: 212 100% 60%;
+  --signal-foreground: 0 0% 4%;
+  --signal-muted: 212 60% 22%;
+
+  --secondary: 0 0% 11%;
+  --secondary-foreground: 0 0% 93%;
+
+  --muted: 0 0% 13%;
+  --muted-foreground: 0 0% 66%;
+  --muted-foreground-soft: 0 0% 53%;
+
+  --accent: 0 0% 14%;
+  --accent-foreground: 0 0% 93%;
+
+  --destructive: 0 92% 62%;
+  --destructive-foreground: 0 0% 100%;
+
+  --success: 212 100% 60%;
+  --success-foreground: 0 0% 4%;
+
+  --warning: 38 91% 60%;
+  --warning-foreground: 0 0% 9%;
+
+  --chart-1: 0 0% 93%;
+  --chart-2: 212 100% 60%;
+  --chart-3: 0 0% 53%;
+  --chart-4: 38 91% 60%;
+  --chart-5: 0 92% 62%;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 @layer components {
-  /* Glassmorphism surface — the recurring "boardroom glass table" material.
-     Used sparingly: nav, dialogs, and one hero moment, never every card. */
+  /*
+   * Card chrome. Elevation is a stacked compound shadow — an 8% 1px inset
+   * ring plus a 4% 2px drop, with an inner canvas-soft ring that simulates
+   * the page background bleeding to the card edge. Never a single heavy
+   * drop-shadow; that reads as a different brand entirely.
+   */
+  .surface-card {
+    background-color: hsl(var(--surface));
+    box-shadow:
+      hsl(var(--shadow-color) / 0.08) 0 0 0 1px,
+      hsl(var(--shadow-color) / 0.04) 0 2px 2px 0,
+      hsl(var(--background)) 0 0 0 1px;
+  }
+
+  .surface-card-hover {
+    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .surface-card-hover:hover {
+    box-shadow:
+      hsl(var(--shadow-color) / 0.12) 0 0 0 1px,
+      hsl(var(--shadow-color) / 0.08) 0 4px 8px -2px,
+      hsl(var(--background)) 0 0 0 1px;
+  }
+
+  .dark .surface-card {
+    box-shadow:
+      hsl(0 0% 100% / 0.1) 0 0 0 1px,
+      hsl(var(--shadow-color) / 0.4) 0 2px 2px 0,
+      hsl(var(--background)) 0 0 0 1px;
+  }
+
+  .dark .surface-card-hover:hover {
+    box-shadow:
+      hsl(0 0% 100% / 0.18) 0 0 0 1px,
+      hsl(var(--shadow-color) / 0.5) 0 4px 8px -2px,
+      hsl(var(--background)) 0 0 0 1px;
+  }
+
+  /*
+   * Nav / dialog chrome. The previous "glass" material is retained as a
+   * class name so the ~10 existing call sites keep working, but it now
+   * resolves to the near-opaque canvas-soft blur the system actually uses:
+   * a hairline bottom edge, no heavy translucency, no saturation boost.
+   */
   .glass {
-    @apply bg-surface/60 backdrop-blur-xl backdrop-saturate-150 border border-border/60;
+    @apply border-border;
+    background-color: hsl(var(--background) / 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
   }
 
   .glass-elevated {
-    @apply bg-surface-elevated/70 backdrop-blur-2xl backdrop-saturate-150 border border-border-strong/50;
+    @apply border border-border;
+    background-color: hsl(var(--surface) / 0.9);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    box-shadow:
+      hsl(var(--shadow-color) / 0.08) 0 0 0 1px,
+      hsl(var(--shadow-color) / 0.04) 0 2px 2px 0;
   }
 
-  /* Subtle film-grain, layered over gradients so large brass/signal glows
-     don't look like flat digital gradients. */
-  .grain::before {
-    content: "";
+  /*
+   * The hero mesh gradient — the entire ornamental vocabulary of the
+   * system, a radial bloom of coral through amber through mint-teal that
+   * erupts from the lower half of the hero and dissolves into the page.
+   * Hero scale only.
+   */
+  .mesh-gradient {
     position: absolute;
     inset: 0;
-    z-index: 1;
     pointer-events: none;
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-image:
+      radial-gradient(34% 30% at 50% 88%, hsl(var(--mesh-warm-start) / 0.42) 0%, transparent 70%),
+      radial-gradient(44% 34% at 26% 100%, hsl(var(--mesh-warm-mid) / 0.38) 0%, transparent 72%),
+      radial-gradient(48% 36% at 78% 104%, hsl(var(--mesh-cool-end) / 0.42) 0%, transparent 74%);
+    filter: blur(40px);
+    /* The bloom dissolves into the page rather than being clipped by the
+       band edge — a hard cut reads as a cropped image, not atmosphere. */
+    mask-image: linear-gradient(to bottom, transparent 34%, hsl(0 0% 0%) 62%, transparent 99%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 34%, hsl(0 0% 0%) 62%, transparent 99%);
+  }
+
+  .dark .mesh-gradient {
+    opacity: 0.55;
+  }
+
+  /*
+   * The column guide rendered behind the hero — the system telegraphs its
+   * grid as a structural landmark rather than hiding it. Removed below the
+   * mobile breakpoint, where the columns stop meaning anything.
+   */
+  .column-guide {
+    position: absolute;
+    inset: 0;
+    /* Constrained to the content measure, not the full bleed — the guide is
+       a drawing of the layout grid, so it has to line up with it. */
+    max-width: theme("maxWidth.content");
+    margin-inline: auto;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to right,
+      hsl(var(--border)) 0 1px,
+      transparent 1px calc(100% / 6)
+    );
+    border-right: 1px solid hsl(var(--border));
+    mask-image: linear-gradient(to bottom, hsl(0 0% 0% / 0.9), transparent 82%);
+    -webkit-mask-image: linear-gradient(to bottom, hsl(0 0% 0% / 0.9), transparent 82%);
+  }
+
+  @media (max-width: 599px) {
+    .column-guide {
+      display: none;
+    }
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Skeleton shimmer sweep, tuned to the ink/brass palette rather than a
-     generic grey-on-grey shimmer. */
   .skeleton-shimmer {
     background: linear-gradient(
       110deg,
@@ -198,9 +321,6 @@
    usable document if the app chrome gets out of the way: without this,
    the PDF contains the sidebar, the navbar and an "Export PDF" button,
    and the report itself is squeezed into a column on the right.
-
-   Printed on white regardless of theme — the dark palette burns ink and
-   renders unreadably on paper.
    --------------------------------------------------------------------- */
 @media print {
   aside,
@@ -230,10 +350,16 @@
     padding: 0 !important;
   }
 
-  /* Cards keep their structure but lose the glow and the dark fill. */
+  .surface-card,
   [class*="rounded-xl"],
   [class*="rounded-lg"] {
     box-shadow: none !important;
+    border: 1px solid #eaeaea !important;
+  }
+
+  .mesh-gradient,
+  .column-guide {
+    display: none !important;
   }
 
   /* Keep a section and its heading together, and never split a vote card

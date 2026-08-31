@@ -110,16 +110,16 @@ function LoginForm() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-4 py-10">
-      <section className="glass w-full max-w-md rounded-2xl border border-border p-8 shadow-2xl">
+      <section className="surface-card w-full max-w-md rounded-md p-6">
         <div className="mb-8 text-center">
-          <span className="mx-auto mb-4 flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+          <span className="mx-auto mb-4 flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Gavel className="size-5" />
           </span>
-          <h1 className="font-display text-2xl font-semibold">Welcome to BoardroomAI</h1>
+          <h1 className="text-2xl font-semibold">Welcome to BoardroomAI</h1>
           <p className="mt-2 text-sm text-muted-foreground">Sign in to convene your AI board.</p>
         </div>
 
-        <div className="mb-6 flex rounded-lg border border-border p-1">
+        <div className="mb-6 flex rounded-md bg-muted p-1">
           {(["sign-in", "sign-up"] as const).map((value) => (
             <button
               key={value}
@@ -131,7 +131,7 @@ function LoginForm() {
                 setFieldErrors({});
               }}
               className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                mode === value ? "bg-primary/12 text-primary" : "text-muted-foreground hover:text-foreground"
+                mode === value ? "bg-surface text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {value === "sign-in" ? "Sign in" : "Create account"}
@@ -158,7 +158,7 @@ function LoginForm() {
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
               {mode === "sign-in" && (
-                <Link href="/auth/forgot-password" className="text-xs text-primary hover:underline">
+                <Link href="/auth/forgot-password" className="text-xs text-signal hover:underline">
                   Forgot password?
                 </Link>
               )}
@@ -213,7 +213,7 @@ function LoginForm() {
         </div>
 
         {success && (
-          <p role="status" className="mt-5 rounded-lg border border-primary/30 bg-primary/10 p-3 text-sm text-foreground">
+          <p role="status" className="mt-5 rounded-md border border-signal/25 bg-signal/5 p-3 text-sm text-foreground">
             {success}
           </p>
         )}

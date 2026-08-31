@@ -4,17 +4,20 @@ import tailwindcssAnimate from "tailwindcss-animate";
 /**
  * BoardroomAI Design System — Tailwind tokens.
  *
- * Palette rationale ("Ink & Brass"): a boardroom is a dark, wood-paneled,
- * brass-fixtured room, not a startup's cream beanbag lounge. The base is a
- * near-black ink (never pure #000 — always tinted blue-grey so surfaces can
- * separate from each other). The primary accent is a desaturated brass —
- * warm without tipping into terracotta/clay. A cool "signal" blue is reserved
- * for anything AI/data-generated (agent avatars, live indicators, charts),
- * so the eye always knows "a machine produced this" vs. "this is structure."
+ * The system is engineered minimalism: a near-white canvas (#fafafa) with
+ * ink-near-black type (#171717), one geometric sans at three weights, and
+ * a single decorative gesture — the hero mesh gradient. Colour is close to
+ * absent outside the one brand blue (#0070f3) used for links, live/AI
+ * indicators and the event badge.
  *
- * All colors are defined as CSS variables in HSL triplets (see app/globals.css)
- * so themes (dark default, light optional) can swap the palette without
- * touching component code.
+ * Two radius scales coexist deliberately and must not be conflated: 6px for
+ * nav buttons, in-page action buttons and cards; 9999px (`rounded-full`) for
+ * marketing CTAs and badge pills. Elevation is a stacked compound shadow
+ * (hairline inset ring + micro drop), never a single heavy drop.
+ *
+ * All colours resolve to CSS variables in `app/globals.css` as HSL triplets,
+ * so the light default and the derived dark variant swap without touching a
+ * single component.
  */
 const config: Config = {
   darkMode: ["class"],
@@ -28,20 +31,27 @@ const config: Config = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1.25rem",
+        DEFAULT: "1rem",
         sm: "1.5rem",
-        lg: "2rem",
-        xl: "2.5rem",
+        lg: "1.5rem",
+        xl: "1.5rem",
       },
       screens: {
         sm: "640px",
         md: "768px",
         lg: "1024px",
-        xl: "1280px",
-        "2xl": "1440px",
+        xl: "1200px",
+        "2xl": "1200px",
       },
     },
     extend: {
+      screens: {
+        // The system's own breakpoints: mobile < 600, tablet 600–959,
+        // desktop 960–1199, wide ≥ 1200.
+        mobile: "600px",
+        tablet: "960px",
+        wide: "1200px",
+      },
       colors: {
         border: "hsl(var(--border))",
         "border-strong": "hsl(var(--border-strong))",
@@ -71,6 +81,9 @@ const config: Config = {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
+          // The lighter of the two muted text tones — fine print, meta
+          // labels, placeholders.
+          soft: "hsl(var(--muted-foreground-soft))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -105,59 +118,69 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
+        // One face across the whole product — there is no separate display
+        // family, by design. `display` is retained as an alias so any future
+        // headline call site resolves to the same geometric sans instead of
+        // silently falling back to the browser default.
+        display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
-        // Deliberate editorial type scale (1.25 ratio), tuned by hand at the
-        // extremes so the display sizes don't feel like a generic clamp().
-        xs: ["0.75rem", { lineHeight: "1.05rem", letterSpacing: "0.01em" }],
-        sm: ["0.8125rem", { lineHeight: "1.2rem", letterSpacing: "0.005em" }],
-        base: ["0.9375rem", { lineHeight: "1.5rem" }],
-        lg: ["1.0625rem", { lineHeight: "1.6rem" }],
-        xl: ["1.25rem", { lineHeight: "1.7rem", letterSpacing: "-0.01em" }],
-        "2xl": ["1.5625rem", { lineHeight: "2rem", letterSpacing: "-0.015em" }],
-        "3xl": ["1.953rem", { lineHeight: "2.3rem", letterSpacing: "-0.02em" }],
-        "4xl": ["2.441rem", { lineHeight: "2.7rem", letterSpacing: "-0.02em" }],
-        "5xl": ["3.052rem", { lineHeight: "3.3rem", letterSpacing: "-0.025em" }],
-        "6xl": ["3.815rem", { lineHeight: "4rem", letterSpacing: "-0.03em" }],
-        "7xl": ["4.768rem", { lineHeight: "4.9rem", letterSpacing: "-0.03em" }],
+        // Measured type scale. Negative tracking is part of the voice and
+        // grows with size; body sits at neutral or a hair negative, and
+        // positive tracking never appears.
+        xs: ["0.75rem", { lineHeight: "1rem" }],
+        sm: ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "-0.02em" }],
+        base: ["1rem", { lineHeight: "1.5rem" }],
+        lg: ["1.125rem", { lineHeight: "1.75rem" }],
+        xl: ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.03em" }],
+        "2xl": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.04em" }],
+        "3xl": ["1.875rem", { lineHeight: "2.25rem", letterSpacing: "-0.04em" }],
+        "4xl": ["2.25rem", { lineHeight: "2.5rem", letterSpacing: "-0.045em" }],
+        "5xl": ["3rem", { lineHeight: "3rem", letterSpacing: "-0.0475em" }],
+        "6xl": ["3.75rem", { lineHeight: "3.75rem", letterSpacing: "-0.05em" }],
+        "7xl": ["4.5rem", { lineHeight: "4.5rem", letterSpacing: "-0.05em" }],
       },
       borderRadius: {
-        xs: "calc(var(--radius) - 8px)",
-        sm: "calc(var(--radius) - 4px)",
-        md: "calc(var(--radius) - 2px)",
-        lg: "var(--radius)",
-        xl: "calc(var(--radius) + 6px)",
-        "2xl": "calc(var(--radius) + 14px)",
-        "3xl": "calc(var(--radius) + 22px)",
+        // 6px is the measured button and card radius; the larger steps are
+        // reserved for container chrome that hosts an image or illustration
+        // cap. Marketing CTAs and badges use `rounded-full` instead.
+        xs: "4px",
+        sm: "4px",
+        md: "6px",
+        lg: "6px",
+        xl: "8px",
+        "2xl": "12px",
+        "3xl": "16px",
       },
       spacing: {
-        // 4px base scale plus a couple of editorial "air" steps used for
-        // section rhythm, so large layouts don't rely on ad-hoc py-24s.
+        // 4px base scale plus the "air" steps used for section rhythm on
+        // long pages — the system runs tight inside cards and breathes
+        // between sections.
         18: "4.5rem",
         22: "5.5rem",
         26: "6.5rem",
         30: "7.5rem",
         34: "8.5rem",
       },
+      maxWidth: {
+        content: "1200px",
+      },
       boxShadow: {
-        xs: "0 1px 2px 0 hsl(var(--shadow-color) / 0.20)",
-        sm: "0 1px 3px 0 hsl(var(--shadow-color) / 0.28), 0 1px 2px -1px hsl(var(--shadow-color) / 0.28)",
-        md: "0 4px 10px -2px hsl(var(--shadow-color) / 0.32), 0 2px 6px -3px hsl(var(--shadow-color) / 0.30)",
-        lg: "0 12px 24px -6px hsl(var(--shadow-color) / 0.38), 0 4px 10px -4px hsl(var(--shadow-color) / 0.30)",
-        xl: "0 24px 48px -12px hsl(var(--shadow-color) / 0.45), 0 8px 16px -6px hsl(var(--shadow-color) / 0.32)",
-        glow: "0 0 0 1px hsl(var(--brass) / 0.35), 0 0 32px -4px hsl(var(--brass) / 0.35)",
-        "glow-signal": "0 0 0 1px hsl(var(--signal) / 0.35), 0 0 32px -4px hsl(var(--signal) / 0.35)",
+        // The stacked compound shadow: a hairline inset ring plus a micro
+        // drop. Every level is a variation on that formula — a single heavy
+        // drop-shadow is never correct here.
+        xs: "hsl(var(--shadow-color) / 0.08) 0 0 0 1px",
+        sm: "hsl(var(--shadow-color) / 0.08) 0 0 0 1px, hsl(var(--shadow-color) / 0.04) 0 2px 2px 0",
+        md: "hsl(var(--shadow-color) / 0.08) 0 0 0 1px, hsl(var(--shadow-color) / 0.06) 0 4px 8px -2px",
+        lg: "hsl(var(--shadow-color) / 0.08) 0 0 0 1px, hsl(var(--shadow-color) / 0.08) 0 8px 16px -4px",
+        xl: "hsl(var(--shadow-color) / 0.08) 0 0 0 1px, hsl(var(--shadow-color) / 0.12) 0 16px 32px -8px, hsl(var(--shadow-color) / 0.06) 0 4px 8px -4px",
         "inner-hairline": "inset 0 1px 0 0 hsl(var(--foreground) / 0.06)",
       },
       backgroundImage: {
-        "grain": "url('/textures/noise.png')",
         "gradient-radial": "radial-gradient(circle at center, var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "boardroom-glow":
-          "radial-gradient(60% 60% at 20% 0%, hsl(var(--brass) / 0.16) 0%, transparent 60%), radial-gradient(50% 50% at 100% 20%, hsl(var(--signal) / 0.12) 0%, transparent 60%)",
       },
       keyframes: {
         "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },

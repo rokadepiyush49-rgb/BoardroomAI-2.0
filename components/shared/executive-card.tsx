@@ -58,8 +58,8 @@ export function ExecutiveCard({
           <AvatarFallback>{getInitials(name)}</AvatarFallback>
         </AvatarPresenceRing>
         <div className="min-w-0 flex-1">
-          <p className="truncate font-display text-lg font-medium leading-tight text-foreground">{name}</p>
-          <p className="text-sm text-primary">{role}</p>
+          <p className="truncate text-base font-semibold leading-6 tracking-tight text-foreground">{name}</p>
+          <p className="text-sm text-muted-soft">{role}</p>
         </div>
       </div>
 
@@ -72,7 +72,7 @@ export function ExecutiveCard({
 
       {quote && (
         <p className="flex gap-2 text-sm italic leading-relaxed text-muted-foreground">
-          <MessageSquareQuote className="mt-0.5 size-4 shrink-0 text-primary/60" aria-hidden />
+          <MessageSquareQuote className="mt-0.5 size-4 shrink-0 text-muted-soft" aria-hidden />
           <span>&ldquo;{quote}&rdquo;</span>
         </p>
       )}
@@ -85,11 +85,11 @@ export function ExecutiveCard({
       className={cn("relative overflow-hidden p-0 text-left", onClick && "w-full", className)}
     >
       {onClick ? (
-        <button type="button" onClick={onClick} className="flex w-full flex-col gap-4 p-5 text-left">
+        <button type="button" onClick={onClick} className="flex w-full flex-col gap-3 p-4 text-left">
           {content}
         </button>
       ) : (
-        <div className="flex w-full flex-col gap-4 p-5 text-left">{content}</div>
+        <div className="flex w-full flex-col gap-3 p-4 text-left">{content}</div>
       )}
     </Card>
   );

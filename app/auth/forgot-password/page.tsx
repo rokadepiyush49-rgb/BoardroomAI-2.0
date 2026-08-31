@@ -42,18 +42,18 @@ function ForgotPasswordForm() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-4">
-      <section className="glass w-full max-w-md rounded-2xl border border-border p-8 shadow-2xl">
+      <section className="surface-card w-full max-w-md rounded-md p-6">
         <div className="mb-8 text-center">
-          <span className="mx-auto mb-4 flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+          <span className="mx-auto mb-4 flex size-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Gavel className="size-5" />
           </span>
-          <h1 className="font-display text-2xl font-semibold">Reset your password</h1>
+          <h1 className="text-2xl font-semibold">Reset your password</h1>
           <p className="mt-2 text-sm text-muted-foreground">We&apos;ll email you a link to choose a new password.</p>
         </div>
 
         {success ? (
           <div className="space-y-4 text-center">
-            <p className="rounded-lg border border-primary/30 bg-primary/10 p-4 text-sm text-foreground">
+            <p className="rounded-md border border-signal/25 bg-signal/5 p-4 text-sm text-foreground">
               Check your inbox for a reset link. It may take a minute to arrive.
             </p>
             <Button asChild variant="outline" className="w-full">

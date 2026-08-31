@@ -140,7 +140,7 @@ export function PitchForm() {
                   onClick={() => toggleExec(exec.id)}
                   className={cn(
                     "flex w-full items-center gap-3 rounded-lg border px-3 py-2.5 text-left transition-colors",
-                    isSelected ? "border-primary/40 bg-primary/8" : "border-border hover:bg-surface-elevated",
+                    isSelected ? "border-foreground bg-surface-elevated" : "border-border hover:bg-surface-elevated",
                   )}
                 >
                   <Avatar size="sm">

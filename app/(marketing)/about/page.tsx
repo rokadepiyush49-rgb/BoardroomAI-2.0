@@ -24,7 +24,7 @@ export default function AboutPage() {
       <div className="grid gap-4 sm:grid-cols-3">
         {values.map((value) => (
           <Card key={value.title} className="p-6">
-            <h3 className="font-display text-lg font-medium">{value.title}</h3>
+            <h3 className="text-lg font-semibold">{value.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{value.description}</p>
           </Card>
         ))}

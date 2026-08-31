@@ -77,7 +77,7 @@ export function SelectionExplainer({ selection, identities }: SelectionExplainer
 
       {open && (
         <div className="border-t border-border/60 px-3 py-3">
-          <p className="text-[0.7rem] uppercase tracking-wide text-muted-foreground">
+          <p className="text-xs text-muted-soft">
             Speaker scoring · this turn
           </p>
 
