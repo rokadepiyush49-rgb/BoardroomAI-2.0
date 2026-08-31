@@ -11,7 +11,7 @@ import { boardExecutives } from "@/features/landing/mock";
 
 export function ExecutivesShowcase() {
   return (
-    <section id="executives" className="border-y border-border bg-surface/40 py-24">
+    <section id="executives" className="border-y bg-surface py-24">
       <div className="container">
         <SectionHeader
           eyebrow="The board"
@@ -32,7 +32,7 @@ export function ExecutivesShowcase() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer(0.08)}
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
           {boardExecutives.map((exec) => (
             <motion.div key={exec.name} variants={fadeUp}>

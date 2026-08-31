@@ -54,7 +54,7 @@ export function PitchHistory({ sessions, loading, currentMeetingId }: PitchHisto
           ))}
 
         <p className="px-2 pt-1 text-xs text-muted-foreground">
-          Full archive in <Link href="/reports" className="text-primary hover:underline">Reports</Link>.
+          Full archive in <Link href="/reports" className="text-signal hover:underline">Reports</Link>.
         </p>
       </CardContent>
     </Card>

@@ -14,8 +14,9 @@ import { cn } from "@/lib/utils";
 import { useWorkspace } from "@/hooks/use-workspace";
 import { updateWorkspaceSettings } from "@/features/workspace/service";
 import { notificationOptions } from "@/features/settings/types";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 
-const tabs = ["Profile", "Workspace", "Notifications", "Billing"] as const;
+const tabs = ["Profile", "Workspace", "Appearance", "Notifications", "Billing"] as const;
 type Tab = (typeof tabs)[number];
 
 export function SettingsTabs() {
@@ -87,7 +88,9 @@ export function SettingsTabs() {
             }}
             className={cn(
               "shrink-0 rounded-md px-3 py-2 text-left text-sm font-medium transition-colors lg:w-full",
-              tab === t ? "bg-primary/12 text-primary" : "text-muted-foreground hover:bg-surface-elevated hover:text-foreground",
+              tab === t
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-surface-elevated hover:text-foreground",
             )}
           >
             {t}
@@ -143,7 +146,7 @@ export function SettingsTabs() {
                   placeholder="Your company"
                 />
               </div>
-              <div className="flex items-center justify-between rounded-lg border border-border p-4">
+              <div className="flex items-center justify-between rounded-md border p-4">
                 <div>
                   <p className="text-sm font-medium text-foreground">Default board composition</p>
                   <p className="text-xs text-muted-foreground">All 8 executives are seated by default for new sessions.</p>
@@ -157,6 +160,20 @@ export function SettingsTabs() {
               </Button>
               {saved && <span className="text-xs text-success">Saved.</span>}
             </CardFooter>
+          </Card>
+        )}
+
+        {tab === "Appearance" && (
+          <Card className="p-0">
+            <CardHeader>
+              <CardTitle className="text-base">Appearance</CardTitle>
+              <CardDescription>
+                Light is the default surface. Dark keeps the same near-monochrome system with the polarity flipped.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ThemeToggle />
+            </CardContent>
           </Card>
         )}
 
@@ -194,7 +211,7 @@ export function SettingsTabs() {
               <CardDescription>Manage your plan and seats.</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 p-4">
+              <div className="flex items-center justify-between rounded-md border bg-background p-4">
                 <div>
                   <p className="text-sm font-medium text-foreground">{plan?.name ?? "Founder"} plan</p>
                   <p className="text-xs text-muted-foreground">

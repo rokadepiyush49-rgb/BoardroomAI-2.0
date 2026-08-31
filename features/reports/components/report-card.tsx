@@ -13,7 +13,7 @@ export function ReportCard({ report }: { report: ReportSummary }) {
         <ScoreCard label="Score" score={report.investmentScore} size="sm" tone="brass" className="shrink-0" />
         <div className="min-w-0 flex-1 space-y-1.5">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-display text-lg font-medium text-foreground">{report.startupName}</h3>
+            <h3 className="text-lg font-semibold text-foreground">{report.startupName}</h3>
             <Badge tone={verdictTone[report.verdict]}>{report.verdict}</Badge>
           </div>
           <p className="text-sm text-muted-foreground">{report.oneLiner}</p>

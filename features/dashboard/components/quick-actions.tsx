@@ -14,8 +14,8 @@ export function QuickActions() {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {actions.map((action) => (
         <Link key={action.href} href={action.href}>
-          <Card interactive className="flex h-full flex-col gap-3 p-5">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-primary/12 text-primary">
+          <Card interactive className="flex h-full flex-col gap-3 p-4">
+            <span className="flex size-9 items-center justify-center rounded-md border text-foreground">
               <action.icon className="size-4" />
             </span>
             <div>

@@ -91,7 +91,7 @@ export function TranscriptFeed({
           return (
           <div key={entry.id} className={cn("flex gap-3", entry.isFounder && "flex-row-reverse text-right")}>
             <Avatar size="sm" className="shrink-0">
-              <AvatarFallback className={entry.isFounder ? "bg-primary/20 text-primary" : undefined}>
+              <AvatarFallback className={entry.isFounder ? "bg-primary text-primary-foreground" : undefined}>
                 {getInitials(entry.speaker)}
               </AvatarFallback>
             </Avatar>
@@ -117,7 +117,7 @@ export function TranscriptFeed({
                   // upstream can shrink, and the layout blows out sideways.
                   "min-w-0 whitespace-pre-wrap break-words rounded-lg px-3 py-2 text-sm leading-relaxed",
                   "transition-shadow duration-300",
-                  entry.isFounder ? "bg-primary/12 text-foreground" : "bg-surface-elevated text-foreground/90",
+                  entry.isFounder ? "border border-foreground/15 bg-surface text-foreground" : "bg-surface-elevated text-foreground",
                   isBeingSpoken && "ring-1 ring-signal/40",
                 )}
               >
@@ -176,7 +176,7 @@ export function TranscriptFeed({
           they are being asked something, not just permitted to interrupt. */}
       {pendingQuestion && canReply && (
         <div className="border-t border-signal/30 bg-signal/5 px-4 py-3">
-          <p className="text-xs font-medium uppercase tracking-wide text-signal">
+          <p className="text-xs font-medium text-signal">
             The board is waiting on you
           </p>
           <p className="mt-1 text-sm text-foreground/90">{pendingQuestion}</p>

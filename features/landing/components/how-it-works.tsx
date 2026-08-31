@@ -23,11 +23,11 @@ export function HowItWorks() {
       >
         {processSteps.map((step, index) => (
           <motion.li key={step.step} variants={fadeUp} className="relative">
-            <span className="font-display text-6xl font-medium text-primary/25">{step.step}</span>
-            <h3 className="mt-3 font-display text-xl font-medium tracking-tight text-foreground">{step.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+            <span className="text-5xl font-semibold tabular-nums text-foreground/20">{step.step}</span>
+            <h3 className="mt-3 text-xl font-semibold text-foreground">{step.title}</h3>
+            <p className="mt-2 text-base text-muted-foreground">{step.description}</p>
             {index < processSteps.length - 1 && (
-              <span className="absolute -right-4 top-6 hidden h-px w-8 bg-border-strong md:block" aria-hidden />
+              <span className="absolute -right-4 top-7 hidden h-px w-8 bg-border md:block" aria-hidden />
             )}
           </motion.li>
         ))}

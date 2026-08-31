@@ -13,7 +13,7 @@ export function CompetitorMatrix({ competitors }: { competitors: Competitor[] })
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-y border-border text-xs uppercase tracking-wide text-muted-foreground">
+            <tr className="border-y bg-background text-xs font-medium text-muted-soft">
               <th className="px-5 py-2 font-medium">Competitor</th>
               <th className="px-5 py-2 font-medium">Segment</th>
               <th className="px-5 py-2 font-medium">Funding</th>

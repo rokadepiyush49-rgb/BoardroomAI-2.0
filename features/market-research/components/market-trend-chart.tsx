@@ -13,7 +13,7 @@ export function MarketTrendChart({ data }: { data: TrendPoint[] }) {
         <XAxis dataKey="year" tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }} axisLine={false} tickLine={false} />
         <YAxis tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 12 }} axisLine={false} tickLine={false} />
         <Tooltip
-          contentStyle={{ background: "hsl(var(--surface-overlay))", border: "1px solid hsl(var(--border-strong))", borderRadius: 10, fontSize: 12 }}
+          contentStyle={{ background: "hsl(var(--surface-overlay))", border: "1px solid hsl(var(--border))", borderRadius: 6, fontSize: 12 }}
         />
         <Line type="monotone" dataKey="marketSize" stroke="hsl(var(--signal))" strokeWidth={2.5} dot={{ r: 3 }} />
       </LineChart>

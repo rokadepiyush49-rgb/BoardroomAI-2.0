@@ -2,25 +2,41 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+/**
+ * The closing band is the system's one polarity flip: canvas-soft gives way
+ * to the ink primary. That contrast is the whole depth cue — no gradient, no
+ * glow, no border. The CTAs stay pill-shaped because this is still a
+ * marketing-scale conversion moment.
+ */
 export function CtaBanner() {
   return (
-    <section className="container py-24">
-      <div className="grain relative overflow-hidden rounded-3xl bg-boardroom-glow border border-border-strong px-8 py-16 text-center sm:px-16">
-        <p className="text-xs font-medium uppercase tracking-[0.14em] text-primary">Ready when you are</p>
-        <h2 className="mx-auto mt-3 max-w-2xl text-balance font-display text-4xl font-medium tracking-tight sm:text-5xl">
+    <section className="bg-primary py-24 text-primary-foreground">
+      <div className="container text-center">
+        <h2 className="mx-auto max-w-2xl text-balance text-3xl font-semibold sm:text-4xl">
           Your board is already assembled.
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-xl text-lg text-primary-foreground/70">
           No scheduling. No prep deck. Submit your pitch and the debate starts in seconds.
         </p>
-        <div className="relative z-10 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button size="lg" asChild>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button
+            size="lg"
+            shape="pill"
+            className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 sm:w-auto"
+            asChild
+          >
             <Link href="/meeting/new">
               Start your pitch
               <ArrowRight />
             </Link>
           </Button>
-          <Button size="lg" variant="secondary" asChild>
+          <Button
+            size="lg"
+            shape="pill"
+            variant="outline"
+            className="w-full border-primary-foreground/25 text-primary-foreground hover:border-primary-foreground/50 hover:bg-primary-foreground/10 hover:text-primary-foreground sm:w-auto"
+            asChild
+          >
             <Link href="/pricing">See pricing</Link>
           </Button>
         </div>
